@@ -59,7 +59,8 @@ def search_keyword(keyword):
 
 
 input_keyword = st.text_input('검색할 키워드를 입력해주세요:', key='input_keyword')
-search_keyword(input_keyword)
+if input_keyword:
+    search_keyword(input_keyword)
 
 
 
