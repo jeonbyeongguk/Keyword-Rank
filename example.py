@@ -1,10 +1,6 @@
 import streamlit as st
 import pandas as pd
-import requests
-from bs4 import BeautifulSoup
-import openpyxl
 import time
-import base64
 
 # 페이지 기본 설정
 st.set_page_config(page_title="My App", page_icon=":smiley:", layout="wide")
@@ -35,8 +31,6 @@ if uploaded_file is not None:
         st.write(df)
     except Exception as e:
         st.error(f'오류 발생: {e}')
-
-st.set_page_config()
 
 ph = st.empty()
 N = 5*60
