@@ -7,11 +7,8 @@ import time
 import base64
 
 # 페이지 기본 설정
-st.set_page_config(
-    page_icon="💡",
-    page_title="테스트",
-    layout="wide",
-)
+st.set_page_config(page_title="My App", page_icon=":smiley:", layout="wide")
+
 def main():
     st.title("💡테스트")
     st.write("Welcome to Streamlit!")
