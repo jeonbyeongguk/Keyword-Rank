@@ -65,6 +65,33 @@ if input_keyword:
     search_keyword(input_keyword)
 
 
+def search_keyword_mo(keyword):
+    url = f'https://m.search.naver.com/search.naver?query={keyword}'
+
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        html = response.text
+        soup = BeautifulSoup(html, 'html.parser')
+        title1 = soup.select_one('#power_link_body > li:nth-child(1) > div > div.tit_wrap > div > a > div.tit_area > span:nth-child(1) > mark')
+        st.write(title1.get_text())
+        
+        title2 = soup.select_one('#power_link_body > li:nth-child(2) > div > div.tit_wrap > div > a > div.tit_area > span:nth-child(1) > mark')
+        st.write(title2.get_text())
+        
+        title3 = soup.select_one('#power_link_body > li:nth-child(3) > div > div.tit_wrap > div > a > div.tit_area > span:nth-child(1) > mark')
+        st.write(title3.get_text())
+
+    else : 
+        st.write(f"Error: {response.status_code}")
+
+
+input_keyword_mo = st.text_input('검색할 키워드를 입력해주세요:', key='input_keyword_mo')
+if input_keyword:
+    search_keyword_mo(input_keyword_mo)
+
+
 
 # 중앙에 위치하고 크기를 키우기 위해 HTML 사용
 st.markdown('<h1 style="text-align:center;">Countdown</h1>', unsafe_allow_html=True)
