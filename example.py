@@ -36,23 +36,31 @@ if uploaded_file is not None:
     except Exception as e:
         st.error(f'오류 발생: {e}')
 
-input_keyword = st.text_input('검색할 키워드를 입력해주세요:', key='input_keyword')
 
-if input_keyword :
-    url = f'https://search.naver.com/search.naver?query={input_keyword }'
+
+def search_keyword(keyword):
+    url = f'https://search.naver.com/search.naver?query={keyword}'
     response = requests.get(url)
-    
+
     if response.status_code == 200:
         html = response.text
         soup = BeautifulSoup(html, 'html.parser')
         title1 = soup.select_one('#power_link_body > ul > li:nth-child(1) > div > div.title_url_area > a > span:nth-child(1)')
-        title2 = soup.select_one('#power_link_body > ul > li:nth-child(2) > div > div.title_url_area > a > span:nth-child(1)')
-        title3 = soup.select_one('#power_link_body > ul > li:nth-child(3) > div > div.title_url_area > a > span:nth-child(1)')
+        print(title1.get_text())
         
-        print(f"{keyword}: {title1.get_text()}, {title2.get_text()}, {title3.get_text()}")
-    
+        title2 = soup.select_one('#power_link_body > ul > li:nth-child(2) > div > div.title_url_area > a > span:nth-child(1)')
+        print(title2.get_text())
+        
+        title3 = soup.select_one('#power_link_body > ul > li:nth-child(3) > div > div.title_url_area > a > span:nth-child(1)')
+        print(title3.get_text())
+
     else : 
         print(response.status_code)
+
+
+input_keyword = st.text_input('검색할 키워드를 입력해주세요:', key='input_keyword')
+search_keyword(input_keyword)
+
 
 
 # 중앙에 위치하고 크기를 키우기 위해 HTML 사용
