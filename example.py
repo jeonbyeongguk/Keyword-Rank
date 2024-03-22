@@ -32,9 +32,13 @@ if uploaded_file is not None:
     except Exception as e:
         st.error(f'오류 발생: {e}')
 
+
+# 중앙에 위치하고 크기를 키우기 위해 HTML 사용
+st.markdown('<h1 style="text-align:center;">Countdown</h1>', unsafe_allow_html=True)
 ph = st.empty()
 N = 5*60
 for secs in range(N,0,-1):
     mm, ss = secs//60, secs%60
-    ph.metric("Countdown", f"{mm:02d}:{ss:02d}")
+    # 크기를 조절하고 가운데 정렬
+    ph.markdown(f'<h2 style="text-align:center;">{mm:02d}:{ss:02d}</h2>', unsafe_allow_html=True)
     time.sleep(1)
