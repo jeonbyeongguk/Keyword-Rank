@@ -32,6 +32,24 @@ if uploaded_file is not None:
     except Exception as e:
         st.error(f'오류 발생: {e}')
 
+input_keyword = st.text_input('검색할 키워드를 입력해주세요:', key='input_keyword')
+
+if keyword:
+    url = f'https://search.naver.com/search.naver?query={keyword}'
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        html = response.text
+        soup = BeautifulSoup(html, 'html.parser')
+        title1 = soup.select_one('#power_link_body > ul > li:nth-child(1) > div > div.title_url_area > a > span:nth-child(1)')
+        title2 = soup.select_one('#power_link_body > ul > li:nth-child(2) > div > div.title_url_area > a > span:nth-child(1)')
+        title3 = soup.select_one('#power_link_body > ul > li:nth-child(3) > div > div.title_url_area > a > span:nth-child(1)')
+        
+        print(f"{keyword}: {title1.get_text()}, {title2.get_text()}, {title3.get_text()}")
+    
+    else : 
+        print(response.status_code)
+
 
 # 중앙에 위치하고 크기를 키우기 위해 HTML 사용
 st.markdown('<h1 style="text-align:center;">Countdown</h1>', unsafe_allow_html=True)
