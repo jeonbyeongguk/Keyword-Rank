@@ -38,3 +38,12 @@ if uploaded_file is not None:
         st.write(df)
     except Exception as e:
         st.error(f'오류 발생: {e}')
+
+keyword = "영어문제"
+
+url = f'https://m.search.naver.com/search.naver?query={keyword}'
+
+response = requests.get(url)
+
+st.write("요청에 사용된 헤더:")
+st.write(response.request.headers)
