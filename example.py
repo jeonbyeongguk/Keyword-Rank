@@ -28,10 +28,10 @@ def search_keyword_debug(keyword):
         # st.text(html)  # 스트림릿 앱에서 직접 HTML 내용을 볼 수 있습니다.
 
         soup = BeautifulSoup(html, 'html.parser')
-        title1 = soup.select_one('#power_link_body > ul > li:nth-child(1) > div > div.title_url_area > a > span:nth-child(1)')
-        st.write(title)
-        if title1:
-            st.write(title1.get_text())
+        # 수정: title1 변수명을 title로 변경
+        title = soup.select_one('#power_link_body > ul > li:nth-child(1) > div > div.title_url_area > a > span:nth-child(1)')
+        if title:
+            st.write(title.get_text())
         else:
             st.write("첫 번째 검색 결과의 제목을 찾을 수 없습니다.")
     else:
@@ -39,4 +39,3 @@ def search_keyword_debug(keyword):
 
 if __name__ == "__main__":
     main()
-
