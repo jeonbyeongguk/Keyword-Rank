@@ -38,7 +38,7 @@ def get_table_download_link(df, file_name='MO 키워드 순위.xlsx'):
     with open(file_name, 'rb') as file:
         data = file.read()
     b64 = base64.b64encode(data).decode()
-    href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="{file_name}">다운로드 결과 파일 (XLSX)</a>'
+    href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="{file_name}"> 엑셀 파일 다운로드(XLSX)</a>'
     return href
 
 def search_keyword(keyword):
@@ -48,9 +48,9 @@ def search_keyword(keyword):
     if response.status_code == 200:
         html = response.text
         soup = BeautifulSoup(html, 'html.parser')
-        title1 = soup.select_one('#power_link_body > li:nth-child(1) > div > div.tit_wrap > div > a > div.tit_area > span:nth-child(1) > mark')
-        title2 = soup.select_one('#power_link_body > li:nth-child(2) > div > div.tit_wrap > div > a > div.tit_area > span:nth-child(1) > mark')
-        title3 = soup.select_one('#power_link_body > li:nth-child(3) > div > div.tit_wrap > div > a > div.tit_area > span:nth-child(1) > mark')
+        title1 = soup.select_one('#power_link_body > ul > li:nth-child(1) > div > div.title_url_area > a > span:nth-child(1)')
+        title2 = soup.select_one('#power_link_body > ul > li:nth-child(2) > div > div.title_url_area > a > span:nth-child(1)')
+        title3 = soup.select_one('#power_link_body > ul > li:nth-child(3) > div > div.title_url_area > a > span:nth-child(1)')
 
         # Check if any of the titles are None before calling get_text()
         title1_text = title1.get_text() if title1 else None
@@ -74,11 +74,11 @@ def search_keyword(keyword):
 # 페이지 기본 설정
 st.set_page_config(
     page_icon="💡",
-    page_title="[MO]키워드 순위 찾기 베타",
+    page_title="[PC]키워드 순위 찾기 베타",
     layout="wide",
 )
 
-st.title("💡[MO]키워드 순위 찾기 베타버전")
+st.title("💡[PC]키워드 순위 찾기 베타버전")
 
 uploaded_file = st.file_uploader("'CSV' 또는 'xlsx' 파일 업로드하세요!!", type=['csv', 'xlsx'])
 
