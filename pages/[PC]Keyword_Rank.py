@@ -43,7 +43,7 @@ def get_table_download_link(df, file_name='MO 키워드 순위.xlsx'):
 
 def search_keyword(keyword):
     url = f'https://m.search.naver.com/search.naver?query={keyword}'
-    response = requests.get(url, headers=headers)
+    response = requests.get(url)
     
     if response.status_code == 200:
         html = response.text
@@ -104,8 +104,8 @@ if uploaded_file is not None:
             # 실행하기 버튼 추가
             if st.button("실행하기"):
                 
-                headers = {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+                # headers = {
+                #    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
 
                 # Open Excel file
                 file_path = uploaded_file
