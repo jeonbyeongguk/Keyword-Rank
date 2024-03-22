@@ -18,7 +18,7 @@ def search_keyword_debug(keyword):
     url = f'https://search.naver.com/search.naver?query={keyword}'
 
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
-    response = requests.get(url, headers=headers)
+    response = requests.get(url)
 
     if response.status_code == 200:
         html = response.text
@@ -30,7 +30,9 @@ def search_keyword_debug(keyword):
         # Display titles
         for title in titles:
             st.write(title.get_text())
-            
+        
+        st.write(response.headers)
+        
         # Convert BeautifulSoup object to string
         soup_str = str(soup)
     
