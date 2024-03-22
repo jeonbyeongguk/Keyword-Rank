@@ -1,104 +1,28 @@
-import streamlit as st
-import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-import openpyxl
-import time
-import base64
 
-# 페이지 기본 설정
-st.set_page_config(page_title="My App", page_icon=":smiley:", layout="wide")
-
-def main():
-    st.title("💡테스트")
-    st.write("Welcome to Streamlit!")
-    st.write("This is a simple example.")
-
-if __name__ == "__main__":
-    main()
+def crawl_website(url):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+    }
     
-
-uploaded_file = st.file_uploader("'CSV' 또는 'xlsx' 파일 업로드하세요!!", type=['csv', 'xlsx'])
-
-if uploaded_file is not None:
-    try:
-        # 업로드된 파일을 데이터프레임으로 읽기
-        if uploaded_file.name.endswith('csv'):
-            df = pd.read_csv(uploaded_file)
-        elif uploaded_file.name.endswith(('xls', 'xlsx')):
-            df = pd.read_excel(uploaded_file, engine='openpyxl')
-        else:
-            st.error('올바른 파일 형식이 아닙니다. CSV 또는 엑셀 파일을 업로드해주세요.')
-            st.stop()
-
-        # 데이터프레임 표시
-        st.write(df)
-    except Exception as e:
-        st.error(f'오류 발생: {e}')
-
-
-
-def search_keyword(keyword):
-    url = f'https://search.naver.com/search.naver?query={keyword}'
-
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+    # 웹사이트에 GET 요청 보내기
     response = requests.get(url, headers=headers)
-
+    
+    # 요청이 성공했는지 확인
     if response.status_code == 200:
+        # HTML 파싱
         html = response.text
         soup = BeautifulSoup(html, 'html.parser')
-        title1 = soup.select_one('#power_link_body > ul > li:nth-child(1) > div > div.title_url_area > a > span:nth-child(1)')
-        st.write(title1.get_text())
         
-        title2 = soup.select_one('#power_link_body > ul > li:nth-child(2) > div > div.title_url_area > a > span:nth-child(1)')
-        st.write(title2.get_text())
+        # 원하는 데이터 추출
+        titles = soup.select('.title')  # 예시: CSS 선택자를 사용하여 타이틀을 추출
         
-        title3 = soup.select_one('#power_link_body > ul > li:nth-child(3) > div > div.title_url_area > a > span:nth-child(1)')
-        st.write(title3.get_text())
+        for title in titles:
+            print(title.text)  # 타이틀 출력 또는 다른 처리 수행
+    else:
+        print(f"Error: {response.status_code}")
 
-    else : 
-        st.write(f"Error: {response.status_code}")
-
-
-input_keyword = st.text_input('검색할 키워드를 입력해주세요:', key='input_keyword')
-if input_keyword:
-    search_keyword(input_keyword)
-
-
-def search_keyword_mo(keyword):
-    url = f'https://m.search.naver.com/search.naver?query={keyword}'
-
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
-    response = requests.get(url, headers=headers)
-
-    if response.status_code == 200:
-        html = response.text
-        soup = BeautifulSoup(html, 'html.parser')
-        title1 = soup.select_one('#power_link_body > li:nth-child(1) > div > div.tit_wrap > div > a > div.tit_area > span:nth-child(1) > mark')
-        st.write(title1.get_text())
-        
-        title2 = soup.select_one('#power_link_body > li:nth-child(2) > div > div.tit_wrap > div > a > div.tit_area > span:nth-child(1) > mark')
-        st.write(title2.get_text())
-        
-        title3 = soup.select_one('#power_link_body > li:nth-child(3) > div > div.tit_wrap > div > a > div.tit_area > span:nth-child(1) > mark')
-        st.write(title3.get_text())
-
-    else : 
-        st.write(f"Error: {response.status_code}")
-
-
-input_keyword_mo = st.text_input('검색할 키워드를 입력해주세요:', key='input_keyword_mo')
-if input_keyword_mo:
-    search_keyword_mo(input_keyword_mo)
-
-
-
-# 중앙에 위치하고 크기를 키우기 위해 HTML 사용
-st.markdown('<h1 style="text-align:center;">Countdown</h1>', unsafe_allow_html=True)
-ph = st.empty()
-N = 5*60
-for secs in range(N,0,-1):
-    mm, ss = secs//60, secs%60
-    # 크기를 조절하고 가운데 정렬
-    ph.markdown(f'<h2 style="text-align:center;">{mm:02d}:{ss:02d}</h2>', unsafe_allow_html=True)
-    time.sleep(1)
+# 크롤링할 웹사이트 URL
+url = 'https://example.com'
+crawl_website(url)
