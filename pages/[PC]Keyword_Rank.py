@@ -46,7 +46,7 @@ def get_table_download_link(df, input_keyword, file_name=None):
 
 def search_keyword(keyword):
     url = f'https://search.naver.com/search.naver?query={keyword}'
-    response = requests.get(url, headers=headers)
+    response = requests.get(url)
     
     if response.status_code == 200:
         html = response.text
