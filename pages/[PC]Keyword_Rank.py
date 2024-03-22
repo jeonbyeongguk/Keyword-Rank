@@ -51,9 +51,9 @@ def search_keyword(keyword):
     if response.status_code == 200:
         html = response.text
         soup = BeautifulSoup(html, 'html.parser')
-        title1 = soup.select_one('#power_link_body > ul > li:nth-child(1) > div > div.title_url_area > a > span:nth-child(1)')
-        title2 = soup.select_one('#power_link_body > ul > li:nth-child(2) > div > div.title_url_area > a > span:nth-child(1)')
-        title3 = soup.select_one('#power_link_body > ul > li:nth-child(3) > div > div.title_url_area > a > span:nth-child(1)')
+        title1 = soup.select_one('#power_link_body > ul > li:nth-child(1) > div > div.title_url_area > a > span')
+        title2 = soup.select_one('#power_link_body > ul > li:nth-child(2) > div > div.title_url_area > a > span')
+        title3 = soup.select_one('#power_link_body > ul > li:nth-child(3) > div > div.title_url_area > a > span')
 
         # Check if any of the titles are None before calling get_text()
         title1_text = title1.get_text() if title1 else None
