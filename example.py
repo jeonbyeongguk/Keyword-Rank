@@ -30,7 +30,12 @@ def search_keyword_debug(keyword):
         # Display titles
         for title in titles:
             st.write(title.get_text())
-
+            
+        # Convert BeautifulSoup object to string
+        soup_str = str(soup)
+    
+        # Display the entire BeautifulSoup object
+        st.write(soup_str)
         
     
     else:
