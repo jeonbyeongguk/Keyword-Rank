@@ -34,8 +34,8 @@ if uploaded_file is not None:
 
 input_keyword = st.text_input('검색할 키워드를 입력해주세요:', key='input_keyword')
 
-if keyword:
-    url = f'https://search.naver.com/search.naver?query={keyword}'
+if input_keyword :
+    url = f'https://search.naver.com/search.naver?query={input_keyword }'
     response = requests.get(url)
     
     if response.status_code == 200:
