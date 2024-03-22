@@ -9,11 +9,11 @@ import base64
 # 페이지 기본 설정
 st.set_page_config(
     page_icon="💡",
-    page_title="[MO]키워드 순위 찾기 베타",
+    page_title="테스트",
     layout="wide",
 )
 def main():
-    st.title("💡[MO]키워드 순위 찾기 베타버전")
+    st.title("💡테스트")
     st.write("Welcome to Streamlit!")
     st.write("This is a simple example.")
 
