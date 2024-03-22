@@ -32,7 +32,7 @@ def search_and_fill_excel(file_path,keyword):
 # 다운로드 함수
 def get_table_download_link(df, input_keyword, file_name=None):
     if file_name is None:
-        file_name = f'{input_keyword} 순위 결과.xlsx'
+        file_name = f'{input_keyword} PC 순위 결과.xlsx'
     
     with pd.ExcelWriter(file_name, engine='openpyxl') as excel_writer:
         df.to_excel(excel_writer, index=False)
