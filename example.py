@@ -55,7 +55,7 @@ def search_keyword(keyword):
         st.write(title3.get_text())
 
     else : 
-        print(response.status_code)
+        st.write(f"Error: {response.status_code}")
 
 
 input_keyword = st.text_input('검색할 키워드를 입력해주세요:', key='input_keyword')
