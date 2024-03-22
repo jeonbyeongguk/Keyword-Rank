@@ -5,6 +5,8 @@ from bs4 import BeautifulSoup
 import openpyxl
 import time
 import base64
+import asyncio
+from pyppeteer import launch
 
 # 페이지 기본 설정
 st.set_page_config(page_title="My App", page_icon=":smiley:", layout="wide")
@@ -71,6 +73,21 @@ input_keyword_mo = st.text_input('검색할 키워드를 입력해주세요:', k
 if input_keyword_mo:
     search_keyword_mo(input_keyword_mo)
 
+
+async def crawl_naver_pc(keyword):
+    browser = await launch()
+    page = await browser.newPage()
+    await page.goto(f'https://search.naver.com/search.naver?query={keyword}')
+    
+    # 원하는 내용을 가져오는 코드를 작성
+    # 예를 들어, 페이지의 특정 요소를 선택하고 내용을 가져오는 등의 작업을 수행
+    
+    # 페이지 내용을 가져온 후 반드시 브라우저를 닫아주어야 합니다.
+    await browser.close()
+
+input_keyword_crawl = st.text_input('검색할 키워드를 입력해주세요:', key='input_keyword_crawl')
+if input_keyword_crawl:
+    asyncio.get_event_loop().run_until_complete(crawl_naver_pc(input_keyword_crawl))
 
 
 # 중앙에 위치하고 크기를 키우기 위해 HTML 사용
