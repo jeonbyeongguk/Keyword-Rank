@@ -39,11 +39,11 @@ if uploaded_file is not None:
     except Exception as e:
         st.error(f'오류 발생: {e}')
 
-keyword = "영어문제"
+st.set_page_config()
 
-url = f'https://m.search.naver.com/search.naver?query={keyword}'
-
-response = requests.get(url)
-
-st.write("요청에 사용된 헤더:")
-st.write(response.request.headers)
+ph = st.empty()
+N = 5*60
+for secs in range(N,0,-1):
+    mm, ss = secs//60, secs%60
+    ph.metric("Countdown", f"{mm:02d}:{ss:02d}")
+    time.sleep(1)
