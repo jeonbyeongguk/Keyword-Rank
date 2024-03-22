@@ -87,15 +87,4 @@ async def crawl_naver_pc(keyword):
 
 input_keyword_crawl = st.text_input('검색할 키워드를 입력해주세요:', key='input_keyword_crawl')
 if input_keyword_crawl:
-    asyncio.get_event_loop().run_until_complete(crawl_naver_pc(input_keyword_crawl))
-
-
-# 중앙에 위치하고 크기를 키우기 위해 HTML 사용
-st.markdown('<h1 style="text-align:center;">Countdown</h1>', unsafe_allow_html=True)
-ph = st.empty()
-N = 5*60
-for secs in range(N,0,-1):
-    mm, ss = secs//60, secs%60
-    # 크기를 조절하고 가운데 정렬
-    ph.markdown(f'<h2 style="text-align:center;">{mm:02d}:{ss:02d}</h2>', unsafe_allow_html=True)
-    time.sleep(1)
+    st.experimental_rerun()  # 이것으로 비동기적으로 코드를 다시 실행합니다.
