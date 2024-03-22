@@ -25,7 +25,7 @@ def search_keyword_debug(keyword):
         soup = BeautifulSoup(html, 'html.parser')
         
         # Extract titles
-        titles = soup.select('#power_link_body > ul > li:nth-child(2)')
+        titles = soup.select('#power_link_body > ul')
         
         # Display titles
         for title in titles:
