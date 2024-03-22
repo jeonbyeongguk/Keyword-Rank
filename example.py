@@ -29,11 +29,12 @@ def search_keyword_debug(keyword):
 
         soup = BeautifulSoup(html, 'html.parser')
         # 수정: title1 변수명을 title로 변경
-        title = soup.select_one('#power_link_body > ul > li:nth-child(1) > div > div.title_url_area > a > span:nth-child(1)')
-        if title:
-            st.write(title.get_text())
-        else:
-            st.write("첫 번째 검색 결과의 제목을 찾을 수 없습니다.")
+        title1 = soup.select_one('#power_link_body > ul > li:nth-child(1) > div > div.title_url_area > a > span:nth-child(1)')
+        st.write(title1.get_text())
+        title2 = soup.select_one('#power_link_body > ul > li:nth-child(2) > div > div.title_url_area > a > span:nth-child(1)')
+        st.write(title1.get_text())
+        
+    
     else:
         st.write(f"Error: {response.status_code}")
 
