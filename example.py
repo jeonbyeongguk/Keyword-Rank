@@ -29,6 +29,7 @@ def search_keyword_debug(keyword):
 
         soup = BeautifulSoup(html, 'html.parser')
         title1 = soup.select_one('#power_link_body > ul > li:nth-child(1) > div > div.title_url_area > a > span:nth-child(1)')
+        st.write(title)
         if title1:
             st.write(title1.get_text())
         else:
@@ -38,3 +39,4 @@ def search_keyword_debug(keyword):
 
 if __name__ == "__main__":
     main()
+
