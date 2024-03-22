@@ -32,7 +32,7 @@ def search_keyword_debug(keyword):
         title1 = soup.select_one('#power_link_body > ul > li:nth-child(1) > div > div.title_url_area > a > span:nth-child(1)')
         st.write(title1.get_text())
         title2 = soup.select_one('#power_link_body > ul > li:nth-child(2) > div > div.title_url_area > a > span:nth-child(1)')
-        st.write(title1.get_text())
+        st.write(title2.get_text())
         
     
     else:
