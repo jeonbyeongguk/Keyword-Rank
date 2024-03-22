@@ -22,17 +22,15 @@ def search_keyword_debug(keyword):
 
     if response.status_code == 200:
         html = response.text
-        
-        # HTML 응답 전체를 스트림릿 앱에서 확인할 수 있도록 출력합니다.
-        # 주의: HTML 내용이 많을 수 있으므로, 실제 사용 시에는 주석 처리하는 것이 좋습니다.
-        # st.text(html)  # 스트림릿 앱에서 직접 HTML 내용을 볼 수 있습니다.
-
         soup = BeautifulSoup(html, 'html.parser')
-        # 수정: title1 변수명을 title로 변경
-        title1 = soup.select_one('#power_link_body > ul > li:nth-child(1) > div > div.title_url_area > a > span:nth-child(1)')
-        st.write(title1.get_text())
-        title2 = soup.select_one('#power_link_body > ul > li:nth-child(2) > div > div.title_url_area > a > span:nth-child(1)')
-        st.write(title2.get_text())
+        
+        # Extract titles
+        titles = soup.select('#power_link_body > ul > li > div > div.title_url_area > a > span:nth-child(1)')
+        
+        # Display titles
+        for title in titles:
+            st.write(title.get_text())
+
         
     
     else:
