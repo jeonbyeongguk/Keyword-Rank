@@ -42,7 +42,7 @@ def get_table_download_link(df, file_name='MO 키워드 순위.xlsx'):
     return href
 
 def search_keyword(keyword):
-    url = f'https://m.search.naver.com/search.naver?query={keyword}'
+    url = f'https://search.naver.com/search.naver?query={keyword}'
     response = requests.get(url, headers=headers)
     
     if response.status_code == 200:
