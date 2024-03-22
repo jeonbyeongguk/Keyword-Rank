@@ -15,7 +15,7 @@ def main():
         search_keyword_debug(input_keyword)
 
 def search_keyword_debug(keyword):
-    url = f'https://search.naver.com/search.naver?query={keyword}'
+    url = f'https://m.search.naver.com/search.naver?query={keyword}'
 
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
     response = requests.get(url)
@@ -25,7 +25,7 @@ def search_keyword_debug(keyword):
         soup = BeautifulSoup(html, 'html.parser')
         
         # Extract titles
-        titles = soup.select('#power_link_body > ul')
+        titles = soup.select('#power_link_body > li:nth-child(1) > div > div.tit_wrap > div > a > div.tit_area > span:nth-child(1) > mark')
         
         # Display titles
         for title in titles:
