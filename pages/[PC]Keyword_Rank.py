@@ -30,8 +30,10 @@ def search_and_fill_excel(file_path,keyword):
     df.to_excel(file_path, index=False)
 
 # 다운로드 함수
-def get_table_download_link(df, file_name='MO 키워드 순위.xlsx'):
-    """Create a download link for a DataFrame"""
+def get_table_download_link(df, input_keyword, file_name=None):
+    if file_name is None:
+        file_name = f'{input_keyword} 순위 결과.xlsx'
+    
     with pd.ExcelWriter(file_name, engine='openpyxl') as excel_writer:
         df.to_excel(excel_writer, index=False)
     
@@ -40,6 +42,7 @@ def get_table_download_link(df, file_name='MO 키워드 순위.xlsx'):
     b64 = base64.b64encode(data).decode()
     href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="{file_name}"> 엑셀 파일 다운로드(XLSX)</a>'
     return href
+
 
 def search_keyword(keyword):
     url = f'https://search.naver.com/search.naver?query={keyword}'
@@ -147,7 +150,7 @@ if uploaded_file is not None:
                 st.write(df)
                 
                 # 데이터프레임 다운로드 버튼
-                st.markdown(get_table_download_link(df), unsafe_allow_html=True)
+                st.markdown(get_table_download_link(df, input_keyword), unsafe_allow_html=True)
 
     except Exception as e:
         st.error(f'오류 발생: {e}')
