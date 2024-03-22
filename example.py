@@ -46,13 +46,13 @@ def search_keyword(keyword):
         html = response.text
         soup = BeautifulSoup(html, 'html.parser')
         title1 = soup.select_one('#power_link_body > ul > li:nth-child(1) > div > div.title_url_area > a > span:nth-child(1)')
-        print(title1.get_text())
+        st.write(title1.get_text())
         
         title2 = soup.select_one('#power_link_body > ul > li:nth-child(2) > div > div.title_url_area > a > span:nth-child(1)')
-        print(title2.get_text())
+        st.write(title2.get_text())
         
         title3 = soup.select_one('#power_link_body > ul > li:nth-child(3) > div > div.title_url_area > a > span:nth-child(1)')
-        print(title3.get_text())
+        st.write(title3.get_text())
 
     else : 
         print(response.status_code)
