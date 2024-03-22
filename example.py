@@ -88,7 +88,7 @@ def search_keyword_mo(keyword):
 
 
 input_keyword_mo = st.text_input('검색할 키워드를 입력해주세요:', key='input_keyword_mo')
-if input_keyword:
+if input_keyword_mo:
     search_keyword_mo(input_keyword_mo)
 
 
